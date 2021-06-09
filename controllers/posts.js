@@ -3,7 +3,8 @@ var Post = require('../models/posts');
 module.exports = {
     index,
     create,
-    update
+    update,
+    delete: deleteOne
 }
 
 function index(req, res) {
@@ -22,4 +23,10 @@ function update(req, res) {
     Post.findByIdAndUpdate(req.params.id, req.body, function(err, post) {
         index(req, res);
     });
+}
+
+function deleteOne(req, res) {
+    Post.findByIdAndDelete(req.params.id, function(err, post) {
+        index(req, res);
+    })
 }
