@@ -1,32 +1,32 @@
 var Post = require('../models/posts');
 
 module.exports = {
-    index,
-    create,
-    update,
-    delete: deleteOne
+    indexPosts,
+    createPost,
+    updatePost,
+    deletePost
 }
 
-function index(req, res) {
+function indexPosts(req, res) {
     Post.find({}, function(err, posts) {
       res.status(200).json(posts);
     });
 }
 
-function create(req, res) {
+function createPost(req, res) {
     Post.create(req.body, function(err, post) {
       res.status(201).json(post);
     });
 }
 
-function update(req, res) {
+function updatePost(req, res) {
     Post.findByIdAndUpdate(req.params.id, req.body, function(err, post) {
-        index(req, res);
+        indexPosts(req, res);
     });
 }
 
-function deleteOne(req, res) {
+function deletePost(req, res) {
     Post.findByIdAndDelete(req.params.id, function(err, post) {
-        index(req, res);
+        indexPosts(req, res);
     })
 }
